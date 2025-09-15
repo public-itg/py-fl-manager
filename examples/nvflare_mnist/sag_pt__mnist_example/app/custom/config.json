@@ -1,0 +1,150 @@
+{
+  "fl_executor": {
+    "registry_id": "fl_executor",
+    "name": "stateless_lightning_fl_executor",
+    "keyword_arguments": {
+      "components": {
+        "dataset_reader": {
+          "registry_id": "dataset_reader",
+          "name": "huggingface",
+          "keyword_arguments": {
+            "dataset_name": "ylecun/mnist",
+            "dataset_mapping": {
+              "train": "train",
+              "test": "test"
+            }
+          }
+        },
+        "dataset_splitter": {
+          "registry_id": "dataset_splitter",
+          "name": "proportion",
+          "keyword_arguments": {
+            "proportions": [
+              0.8,
+              0.1,
+              0.1
+            ]
+          }
+        },
+        "dataset_distributor": {
+          "registry_id": "dataset_distributor",
+          "name": "iid",
+          "keyword_arguments": {
+            "num_clients": 2
+          }
+        },
+        "dataset_formatter": [
+          {
+            "registry_id": "dataset_formatter",
+            "name": "dict_extractor",
+            "keyword_arguments": {
+              "in_col_name": "image",
+              "keys": [
+                "bytes"
+              ]
+            }
+          },
+          {
+            "registry_id": "dataset_formatter",
+            "name": "column_dropper",
+            "keyword_arguments": {
+              "in_col_name": "image"
+            }
+          },
+          {
+            "registry_id": "dataset_formatter",
+            "name": "column_rename",
+            "keyword_arguments": {
+              "in_col_name": "image__bytes",
+              "out_col_name": "image"
+            }
+          }
+        ],
+        "dataset_validator": {
+          "registry_id": "dataset_validator",
+          "name": "base_pandera",
+          "keyword_arguments": {
+            "columns": {
+              "image": [
+                {
+                  "registry_id": "dataset_checker",
+                  "name": "is_instance",
+                  "keyword_arguments": {
+                    "instance_cls": [
+                      "bytes"
+                    ]
+                  }
+                }
+              ],
+              "label": [
+                {
+                  "registry_id": "dataset_checker",
+                  "name": "is_instance",
+                  "keyword_arguments": {
+                    "instance_cls": [
+                      "int"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "dataframe_dataset": {
+          "registry_id": "dataframe_dataset",
+          "name": "torch_dataframe_transforms_dataset",
+          "keyword_arguments": {
+            "transforms": {
+              "image": [
+                {
+                  "registry_id": "dataset_preprocessor",
+                  "name": "bytes_to_tensor"
+                },
+                {
+                  "registry_id": "dataset_preprocessor",
+                  "name": "tensor_normalization",
+                  "keyword_arguments": {
+                    "std": [
+                      0.3081
+                    ],
+                    "mean": [
+                      0.1307
+                    ]
+                  }
+                }
+              ]
+            },
+            "output_keys": [
+              "image",
+              "label"
+            ]
+          }
+        },
+        "fl_model": {
+          "registry_id": "fl_model",
+          "name": "modern_le_net_5",
+          "keyword_arguments": {
+            "task": "supervised-multiclass-image-classification"
+          }
+        }
+      },
+      "fl_train_id": "sag_pt__mnist_example",
+      "best_ckpt_kwargs": {
+        "filename": "best-{val_loss:.2f}",
+        "monitor": "val_loss",
+        "mode": "min"
+      },
+      "fl_algorithm": "fed_prox",
+      "fl_algorithm_kwargs": {
+        "mu": 0.1
+      },
+      "trainer_kwargs": {
+        "max_epochs": 1
+      },
+      "datamodule_kwargs": {
+        "batch_size": 64,
+        "num_workers": 8
+      }
+    }
+  }
+}

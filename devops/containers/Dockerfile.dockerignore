@@ -1,0 +1,10 @@
+*
+
+# Required project files
+!packages
+!pyproject.toml
+!uv.lock
+!README.md
+
+# Files used in the Dockerfile
+!devops/additional_packages.txt

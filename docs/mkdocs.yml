@@ -1,0 +1,228 @@
+site_name: FL Manager
+watch: [
+  mkdocs.yml,
+  docs,
+  ../README.md,
+  ../CHANGELOG.md,
+  ../packages
+]
+
+nav:
+  - FL Manager:
+    - index.md
+    - acknowledgements.md
+  - Learn:
+    - learn/index.md
+    - Examples:
+      - learn/examples/index.md
+      - examples/components_schemas.ipynb
+      - examples/data_distribution.ipynb
+      - examples/dataset_formatter.ipynb
+      - examples/job_generation.ipynb
+  - Reference:
+    - reference/index.md
+    - fl-manager-core:
+      - Registry:
+        - reference/core/registry/index.md
+        - reference/core/registry/meta_registry.md
+      - Components:
+        - reference/core/components/index.md
+        - Readers:
+          - reference/core/components/readers/index.md
+          - reference/core/components/readers/local.md
+        - Distributors:
+          - reference/core/components/distributors/index.md
+          - reference/core/components/distributors/iid.md
+          - reference/core/components/distributors/dirichlet.md
+        - Splitters:
+          - reference/core/components/splitters/index.md
+          - reference/core/components/splitters/proportion.md
+          - reference/core/components/splitters/stratified.md
+        - Formatters:
+          - reference/core/components/formatters/index.md
+          - reference/core/components/formatters/column_dropper.md
+          - reference/core/components/formatters/column_explode.md
+          - reference/core/components/formatters/column_rename.md
+          - reference/core/components/formatters/dict_extractor.md
+        - Checkers:
+          - reference/core/components/checkers/index.md
+          - reference/core/components/checkers/is_instance.md
+        - Validators:
+          - reference/core/components/validators/index.md
+          - reference/core/components/validators/base_pandera.md
+        - Preprocessors:
+          - reference/core/components/preprocessors/index.md
+        - Datasets:
+          - reference/core/components/datasets/index.md
+        - Models:
+          - reference/core/components/models/index.md
+      - Dataflows:
+        - reference/core/dataflows/dataset_setup.md
+      - Executors:
+        - reference/core/executors/index.md
+        - NVFlare:
+          - reference/core/executors/nv/nvflare_client_api_executor.md
+      - Runners:
+        - reference/core/runners/index.md
+        - reference/core/runners/base.md
+      - Schemas:
+        - reference/core/schemas/all_dataset.md
+        - reference/core/schemas/fl_config.md
+        - reference/core/schemas/registry_item.md
+      - Utils:
+        - reference/core/utils/composite_utils.md
+        - reference/core/utils/df_utils.md
+        - reference/core/utils/import_utils.md
+        - reference/core/utils/nvflare_utils.md
+        - reference/core/utils/typing_utils.md
+    - fl-manager-lightning:
+      - Components:
+        - Callbacks:
+          - reference/extensions/lightning/components/callbacks/index.md
+          - reference/extensions/lightning/components/callbacks/ditto.md
+          - reference/extensions/lightning/components/callbacks/fed_avg.md
+          - reference/extensions/lightning/components/callbacks/fed_bn.md
+          - reference/extensions/lightning/components/callbacks/fed_opt.md
+          - reference/extensions/lightning/components/callbacks/fed_prox.md
+        - DataModule:
+          - reference/extensions/lightning/components/datamodule/index.md
+          - reference/extensions/lightning/components/datamodule/default.md
+          - reference/extensions/lightning/components/datamodule/tokenizer.md
+      - Dataflows:
+        - reference/extensions/lightning/dataflows/base_lightning_trainer.md
+      - Executors:
+        - reference/extensions/lightning/executors/index.md
+        - NVFlare:
+          - reference/extensions/lightning/executors/nv/nvflare_lightning_executor.md
+          - reference/extensions/lightning/executors/nv/stateful_nvflare_lightning_executor.md
+          - reference/extensions/lightning/executors/nv/stateless_nvflare_lightning_executor.md
+          - reference/extensions/lightning/executors/nv/stateless_ditto_nvflare_lightning_executor.md
+        - reference/extensions/lightning/executors/stateful_lightning_fl_executor.md
+        - reference/extensions/lightning/executors/stateless_lightning_fl_executor.md
+        - reference/extensions/lightning/executors/stateless_ditto_lightning_fl_executor.md
+      - Utils:
+        - reference/extensions/lightning/utils/lightning_callback_wrapper.md
+        - reference/extensions/lightning/utils/lightning_utils.md
+    - fl-manager-components-readers-huggingface:
+      - reference/integrations/components/readers/huggingface/huggingface.md
+    - fl-manager-components-formatters-pillow:
+      - reference/integrations/components/formatters/pillow/image_path_to_bytes.md
+    - fl-manager-components-preprocessors-torchvision:
+      - reference/integrations/components/preprocessors/torchvision/bytes_to_tensor.md
+      - reference/integrations/components/preprocessors/torchvision/pil_image_to_tensor.md
+      - reference/integrations/components/preprocessors/torchvision/tensor_normalization.md
+    - fl-manager-components-datasets-torch:
+      - reference/integrations/components/datasets/torch/torch_dataframe_transforms_dataset.md
+    - fl-manager-components-models-lightning:
+      - reference/integrations/components/models/lightning/batch_norm_le_net_5.md
+      - reference/integrations/components/models/lightning/mnist_mobile_net.md
+      - reference/integrations/components/models/lightning/modern_le_net_5.md
+      - reference/integrations/components/models/lightning/tiny_bert_classifier.md
+    - fl-manager-utils-job-generator:
+      - reference/utils/job_generator/job_creator.md
+      - Federated Job:
+        - reference/utils/job_generator/federated_job/index.md
+        - PyTorch:
+          - reference/utils/job_generator/federated_job/pt/index.md
+          - reference/utils/job_generator/federated_job/pt/all_pt_federated_job.md
+          - reference/utils/job_generator/federated_job/pt/all_pt_fed_job.md
+      - Schemas:
+        - reference/utils/job_generator/schemas/job_config.md
+        - reference/utils/job_generator/schemas/client_config.md
+    - fl-manager-utils-nvflare-extensions:
+      - NVFlare:
+        - Executors:
+          - reference/utils/nvflare_extensions/nv/executors/base_weight_initializer_executor.md
+        - Workflows:
+          - reference/utils/nvflare_extensions/nv/workflows/base_controller.md
+          - reference/utils/nvflare_extensions/nv/workflows/base_controller_with_client_selection.md
+          - reference/utils/nvflare_extensions/nv/workflows/model_export_controller.md
+          - reference/utils/nvflare_extensions/nv/workflows/pfl_model_export_controller.md
+      - PyTorch:
+        - Executors:
+          - reference/utils/nvflare_extensions/pt/executors/pt_weight_initializer_executor.md
+  - Release Notes: release-notes.md
+
+theme:
+  name: material
+  custom_dir: ./overrides
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: white
+      accent: amber
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+  features:
+    - search.suggest
+    - search.highlight
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tooltips
+    - content.tabs.link
+    - navigation.indexes
+    - navigation.path
+    - navigation.tabs
+    - navigation.top
+  logo: img/logo.jpg
+  favicon: img/logo.jpg
+  language: en
+
+markdown_extensions:
+  toc:
+    permalink: true
+  mdx_include:
+    base_path: docs
+  admonition: null
+  extra: null
+  pymdownx.superfences:
+    custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: "!!python/name:pymdownx.superfences.fence_code_format ''"
+  pymdownx.tabbed:
+    alternate_style: true
+  pymdownx.tilde: null
+  attr_list: null
+  md_in_html: null
+
+plugins:
+  - search: null
+  - gen-files:
+      scripts:
+        - ../scripts/docs/gen_index.py
+        - ../scripts/docs/gen_release_notes.py
+        - ../scripts/docs/gen_examples.py
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - ../packages/fl-manager-core/src
+          options:
+            docstring_style: google
+            extensions:
+              - griffe_typingdoc
+            show_root_heading: true
+            show_root_full_path: false
+            show_if_no_docstring: true
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            unwrap_annotated: true
+            filters:
+              - '!^_'
+            merge_init_into_class: true
+            docstring_section_style: spacy
+            signature_crossrefs: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+  - mkdocs-jupyter: null
